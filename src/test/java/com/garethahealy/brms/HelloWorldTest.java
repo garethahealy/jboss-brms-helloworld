@@ -22,23 +22,26 @@ package com.garethahealy.brms;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
+import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
 
 public class HelloWorldTest {
 
     @Test
-    public void checkForAdult() {
+    public void checkForAdultUsingStateful() {
         KieSessionFactory factory = new KieSessionFactory();
         factory.start();
 
-        StatelessKieSession session = factory.getStatelessSession();
+        KieSession session = factory.getStatefulSession();
 
         Person person = new Person();
         person.setName("Adult Gareth");
         person.setIsOver18(null);
         person.setDob(LocalDate.now().minusYears(21));
 
-        session.execute(person);
+        session.insert(LocalDate.now());
+        session.insert(person);
+        session.fireAllRules();
 
         Assert.assertNotNull(person.getIsOver18());
         Assert.assertTrue(person.getIsOver18());
@@ -46,21 +49,23 @@ public class HelloWorldTest {
     }
 
     @Test
-    public void checkForChild() {
+    public void checkForChildUsingStateful() {
         KieSessionFactory factory = new KieSessionFactory();
         factory.start();
 
-        StatelessKieSession session = factory.getStatelessSession();
+        KieSession session = factory.getStatefulSession();
 
         Person person = new Person();
-        person.setName("Babt Gareth");
+        person.setName("Child Gareth");
         person.setIsOver18(null);
-        person.setDob(LocalDate.now());
+        person.setDob(LocalDate.now().minusYears(5));
 
-        session.execute(person);
+        session.insert(LocalDate.now());
+        session.insert(person);
+        session.fireAllRules();
 
         Assert.assertNotNull(person.getIsOver18());
         Assert.assertFalse(person.getIsOver18());
-        Assert.assertEquals("Babt Gareth", person.getName());
+        Assert.assertEquals("Child Gareth", person.getName());
     }
 }
