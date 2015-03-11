@@ -1,0 +1,19 @@
+package com.garethahealy.brms;
+
+import org.joda.time.LocalDate;
+
+rule "My HelloWorld Example - Over18"
+    dialect "mvel"
+	when
+	    $person : Person( dob.isBefore(new LocalDate().minusYears(18))  )
+	then
+		$person.setIsOver18(true);
+end
+
+rule "My HelloWorld Example - Under18"
+    dialect "mvel"
+	when
+	    $person : Person( !dob.isBefore(new LocalDate().minusYears(18))  )
+	then
+		$person.setIsOver18(false);
+end
