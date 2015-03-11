@@ -13,6 +13,7 @@
     <artifactId>HelloWorld</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
+    <packaging>kjar</packaging>
 
     <scm>
         <connection>scm:git:https://github.com/garethahealy/jboss-brms-helloworld/tree/master</connection>
