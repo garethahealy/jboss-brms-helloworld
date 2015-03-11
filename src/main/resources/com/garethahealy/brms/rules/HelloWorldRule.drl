@@ -1,5 +1,6 @@
-package com.garethahealy.brms;
+package com.garethahealy.brms.rules.brms;
 
+import com.garethahealy.brms.facts.Person;
 import org.joda.time.LocalDate;
 
 rule "My HelloWorld Example - Over18"

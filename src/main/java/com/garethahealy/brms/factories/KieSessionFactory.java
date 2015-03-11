@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package com.garethahealy.brms;
+package com.garethahealy.brms.factories;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package com.garethahealy.brms;
+package com.garethahealy.brms.facts;
 
 import org.joda.time.LocalDate;
 
