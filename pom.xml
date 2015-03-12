@@ -13,7 +13,7 @@
     <artifactId>brms-helloworld</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
-    <packaging>kjar</packaging>
+    <packaging>jar</packaging>
 
     <scm>
         <connection>scm:git:https://github.com/garethahealy/jboss-brms-helloworld/tree/master</connection>
@@ -21,4 +21,51 @@
         <url>https://github.com/garethahealy/jboss-brms-helloworld/tree/master</url>
     </scm>
 
+    <properties>
+        <arquillian-bom-version>1.1.7.Final</arquillian-bom-version>
+        <javaee6-with-tools-version>1.0.4.Final-redhat-4</javaee6-with-tools-version>
+        <jboss-as-arquillian-container-managed-version>7.2.0.Final</jboss-as-arquillian-container-managed-version>
+        <jboss-as-home>/opt/rh/jboss-brms-6.0.3.GA/jboss-eap-6.1/bin</jboss-as-home>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${arquillian-bom-version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Testing: Arquillian -->
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.protocol</groupId>
+            <artifactId>arquillian-protocol-servlet</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-arquillian-container-managed</artifactId>
+            <version>${jboss-as-arquillian-container-managed-version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JavaEE BOM -->
+        <dependency>
+            <groupId>org.jboss.bom</groupId>
+            <artifactId>jboss-javaee-6.0-with-tools</artifactId>
+            <type>pom</type>
+            <scope>import</scope>
+            <version>${javaee6-with-tools-version}</version>
+        </dependency>
+    </dependencies>
 </project>

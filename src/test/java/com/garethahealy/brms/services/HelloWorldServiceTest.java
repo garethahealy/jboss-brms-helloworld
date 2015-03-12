@@ -17,41 +17,46 @@
  * limitations under the License.
  * #L%
  */
-package com.garethahealy.brms.rules;
+package com.garethahealy.brms.services;
 
+import javax.inject.Inject;
+
+import com.garethahealy.brms.DefaultDeployment;
 import com.garethahealy.brms.factories.KieSessionFactory;
 import com.garethahealy.brms.facts.Person;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.kie.api.runtime.KieSession;
 
-public class HelloWorldTest {
+@RunWith(Arquillian.class)
+public class HelloWorldServiceTest {
+
+    @Inject
+    private HelloWorldService helloWorldService;
+
+    @Deployment
+    public static JavaArchive deployment() {
+        return DefaultDeployment.deployment();
+    }
 
     @Test
     public void checkForAdultUsingStateful() {
-        KieSessionFactory factory = new KieSessionFactory();
-        factory.start();
+        Person person = new Person();
+        person.setName("Adult Gareth");
+        person.setIsOver18(null);
+        person.setDob(LocalDate.now().minusYears(21));
 
-        KieSession session = factory.getStatefulSession();
+        Person answer = helloWorldService.doSomething(person);
 
-        try {
-            Person person = new Person();
-            person.setName("Adult Gareth");
-            person.setIsOver18(null);
-            person.setDob(LocalDate.now().minusYears(21));
-
-            session.insert(LocalDate.now());
-            session.insert(person);
-            session.fireAllRules();
-
-            Assert.assertNotNull(person.getIsOver18());
-            Assert.assertTrue(person.getIsOver18());
-            Assert.assertEquals("Adult Gareth", person.getName());
-        } finally {
-            factory.disposeOf(session);
-        }
+        Assert.assertNotNull(answer.getIsOver18());
+        Assert.assertTrue(answer.getIsOver18());
+        Assert.assertEquals("Adult Gareth", answer.getName());
     }
 
     @Test
