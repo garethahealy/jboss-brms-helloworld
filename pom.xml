@@ -9,8 +9,8 @@
         <version>1.0.1-SNAPSHOT</version>
         <relativePath>../poms/brms-parent</relativePath>
     </parent>
-    <groupId>com.garethahealy.brms.rules.brms</groupId>
-    <artifactId>HelloWorld</artifactId>
+    <groupId>com.garethahealy.brms</groupId>
+    <artifactId>brms-helloworld</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <packaging>kjar</packaging>
