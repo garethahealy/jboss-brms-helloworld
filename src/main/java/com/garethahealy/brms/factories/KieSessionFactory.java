@@ -22,22 +22,29 @@ package com.garethahealy.brms.factories;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.ApplicationScoped;
+
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
 
+@ApplicationScoped
 public class KieSessionFactory {
 
     private KieContainer kContainer;
 
     private Set<KieSession> statefulSessions = new HashSet<KieSession>();
 
+    @PostConstruct
     public void start() {
         KieServices kServices = KieServices.Factory.get();
         kContainer = kServices.getKieClasspathContainer();
     }
 
+    @PreDestroy
     public void stop() {
         for (KieSession session : statefulSessions) {
             session.dispose();
