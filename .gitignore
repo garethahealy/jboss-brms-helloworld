@@ -20,3 +20,7 @@ target/
 # General #
 tmp/
 *.tmp
+
+# Arquillian Files #
+.niogit
+.index
