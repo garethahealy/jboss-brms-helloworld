@@ -22,7 +22,6 @@ package com.garethahealy.brms.services;
 import javax.inject.Inject;
 
 import com.garethahealy.brms.DefaultDeployment;
-import com.garethahealy.brms.factories.KieSessionFactory;
 import com.garethahealy.brms.facts.Person;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -32,7 +31,6 @@ import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.kie.api.runtime.KieSession;
 
 @RunWith(Arquillian.class)
 public class HelloWorldServiceTest {
@@ -61,26 +59,15 @@ public class HelloWorldServiceTest {
 
     @Test
     public void checkForChildUsingStateful() {
-        KieSessionFactory factory = new KieSessionFactory();
-        factory.start();
+        Person person = new Person();
+        person.setName("Child Gareth");
+        person.setIsOver18(null);
+        person.setDob(LocalDate.now().minusYears(5));
 
-        KieSession session = factory.getStatefulSession();
+        Person answer = helloWorldService.doSomething(person);
 
-        try {
-            Person person = new Person();
-            person.setName("Child Gareth");
-            person.setIsOver18(null);
-            person.setDob(LocalDate.now().minusYears(5));
-
-            session.insert(LocalDate.now());
-            session.insert(person);
-            session.fireAllRules();
-
-            Assert.assertNotNull(person.getIsOver18());
-            Assert.assertFalse(person.getIsOver18());
-            Assert.assertEquals("Child Gareth", person.getName());
-        } finally {
-            factory.disposeOf(session);
-        }
+        Assert.assertNotNull(answer.getIsOver18());
+        Assert.assertFalse(answer.getIsOver18());
+        Assert.assertEquals("Child Gareth", answer.getName());
     }
 }
