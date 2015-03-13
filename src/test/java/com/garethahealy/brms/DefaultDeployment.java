@@ -35,6 +35,8 @@
  */
 package com.garethahealy.brms;
 
+import java.io.File;
+
 import com.garethahealy.brms.factories.KieSessionFactory;
 import com.garethahealy.brms.facts.Person;
 import com.garethahealy.brms.services.HelloWorldService;
@@ -42,6 +44,7 @@ import com.garethahealy.brms.services.HelloWorldService;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 public final class DefaultDeployment {
 
@@ -51,10 +54,23 @@ public final class DefaultDeployment {
 
     public static JavaArchive deployment() {
         JavaArchive jar = ShrinkWrap.create(JavaArchive.class)
-            .addPackages(true, KieSessionFactory.class.getPackage().getName())
-            .addPackages(true, Person.class.getPackage().getName())
-            .addPackages(true, HelloWorldService.class.getPackage().getName())
-            .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+            .addClass(KieSessionFactory.class)
+            .addClass(Person.class)
+            .addClass(HelloWorldService.class)
+            .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+            .addAsResource(new File("src/test/resources/WEB-INF/jboss-deployment-structure.xml"));
+
+        JavaArchive[] libs = Maven.resolver()
+            .loadPomFromFile("pom.xml")
+            .importCompileAndRuntimeDependencies()
+            .importTestDependencies()
+            .resolve()
+            .withTransitivity()
+            .as(JavaArchive.class);
+
+        for (JavaArchive lib : libs) {
+            jar = jar.merge(lib);
+        }
 
         return jar;
     }
