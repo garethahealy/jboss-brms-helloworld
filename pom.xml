@@ -25,7 +25,7 @@
         <arquillian-bom-version>1.1.7.Final</arquillian-bom-version>
         <javaee6-with-tools-version>1.0.4.Final-redhat-4</javaee6-with-tools-version>
         <jboss-as-arquillian-container-managed-version>7.2.0.Final</jboss-as-arquillian-container-managed-version>
-        <jboss-as-home>/opt/rh/jboss-brms-6.0.3.GA/jboss-eap-6.1/bin</jboss-as-home>
+        <shrinkwrap-resolver-bom-version>2.1.1</shrinkwrap-resolver-bom-version>
     </properties>
 
     <dependencyManagement>
@@ -34,6 +34,20 @@
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>${arquillian-bom-version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.bom</groupId>
+                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
+                <version>${javaee6-with-tools-version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-bom</artifactId>
+                <version>${shrinkwrap-resolver-bom-version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -59,13 +73,36 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JavaEE BOM -->
+        <!-- shrinkwrap dependencies -->
         <dependency>
-            <groupId>org.jboss.bom</groupId>
-            <artifactId>jboss-javaee-6.0-with-tools</artifactId>
-            <type>pom</type>
-            <scope>import</scope>
-            <version>${javaee6-with-tools-version}</version>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-spi</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-api-maven</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-spi-maven</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
