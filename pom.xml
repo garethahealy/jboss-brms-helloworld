@@ -73,7 +73,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- shrinkwrap dependencies -->
+        <!-- Testing: Shrinkwrap -->
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-api</artifactId>
