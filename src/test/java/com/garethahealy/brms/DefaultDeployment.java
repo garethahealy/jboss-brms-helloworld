@@ -42,8 +42,8 @@ import com.garethahealy.brms.facts.Person;
 import com.garethahealy.brms.services.HelloWorldService;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 public final class DefaultDeployment {
@@ -52,14 +52,7 @@ public final class DefaultDeployment {
 
     }
 
-    public static JavaArchive deployment() {
-        JavaArchive jar = ShrinkWrap.create(JavaArchive.class)
-            .addClass(KieSessionFactory.class)
-            .addClass(Person.class)
-            .addClass(HelloWorldService.class)
-            .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
-            .addAsResource(new File("src/test/resources/WEB-INF/jboss-deployment-structure.xml"));
-
+    public static WebArchive deployment() {
         JavaArchive[] libs = Maven.resolver()
             .loadPomFromFile("pom.xml")
             .importCompileAndRuntimeDependencies()
@@ -68,9 +61,15 @@ public final class DefaultDeployment {
             .withTransitivity()
             .as(JavaArchive.class);
 
-        for (JavaArchive lib : libs) {
-            jar = jar.merge(lib);
-        }
+        WebArchive jar = ShrinkWrap.create(WebArchive.class)
+            .addClass(KieSessionFactory.class)
+            .addClass(Person.class)
+            .addClass(HelloWorldService.class)
+            .addAsLibraries(libs)
+            .addAsManifestResource(new File("src/main/resources/META-INF/kmodule.xml"))
+            .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"))
+            .addAsWebInfResource(new File("src/main/webapp/WEB-INF/jboss-deployment-structure.xml"));
+
 
         return jar;
     }

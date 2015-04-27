@@ -1,4 +1,4 @@
-<!--
+<%--
   #%L
   brms-helloworld
   %%
@@ -16,5 +16,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   #L%
-  -->
-<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule"/>
+  --%>
+<!DOCTYPE html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>BRMS Helloworld</title>
+</head>
+<body>
+<h3>Test...</h3>
+</body>
+</html>

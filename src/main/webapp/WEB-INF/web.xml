@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <!--
   #%L
   brms-helloworld
@@ -19,18 +18,8 @@
   #L%
   -->
 
-<jboss-deployment-structure>
-    <deployment>
-        <dependencies>
-            <system export="true">
-                <paths>
-                    <path name="com/sun/xml/internal/ws/util/exception"/>
-                </paths>
-            </system>
-            <module name="org.kie" export="true"/>
-            <module name="org.drools" export="true"/>
-            <module name="org.jbpm-minimal" export="true"/>
-            <module name="org.mvel" export="true"/>
-        </dependencies>
-    </deployment>
-</jboss-deployment-structure>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

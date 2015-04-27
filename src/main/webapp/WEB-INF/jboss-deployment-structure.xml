@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
   #%L
   brms-helloworld
@@ -17,4 +18,14 @@
   limitations under the License.
   #L%
   -->
-<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule"/>
+
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <module name="org.kie" export="true"/>
+            <module name="org.drools" export="true"/>
+            <module name="org.jbpm-minimal" export="true"/>
+            <module name="org.mvel" export="true"/>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>

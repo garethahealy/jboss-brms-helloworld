@@ -6,14 +6,14 @@
     <parent>
         <groupId>com.garethahealy</groupId>
         <artifactId>brms-parent</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.5-SNAPSHOT</version>
         <relativePath>../poms/brms-parent</relativePath>
     </parent>
     <groupId>com.garethahealy.brms</groupId>
     <artifactId>brms-helloworld</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
-    <packaging>kjar</packaging>
+    <packaging>war</packaging>
 
     <scm>
         <connection>scm:git:https://github.com/garethahealy/jboss-brms-helloworld/tree/master</connection>
@@ -27,6 +27,18 @@
         <jboss-as-arquillian-container-managed-version>7.2.0.Final</jboss-as-arquillian-container-managed-version>
         <shrinkwrap-resolver-bom-version>2.1.1</shrinkwrap-resolver-bom-version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <!--<configuration>
+                    <webXml>src\main\resources\webapp\WEB-INF\web.xml</webXml>
+                </configuration>-->
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencyManagement>
         <dependencies>
@@ -55,6 +67,12 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Testing: Arquillian -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
@@ -104,5 +122,6 @@
             <artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 </project>

@@ -27,6 +27,7 @@ import com.garethahealy.brms.facts.Person;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,7 +40,7 @@ public class HelloWorldServiceTest {
     private HelloWorldService helloWorldService;
 
     @Deployment
-    public static JavaArchive deployment() {
+    public static WebArchive deployment() {
         return DefaultDeployment.deployment();
     }
 
