@@ -41,6 +41,8 @@ import com.garethahealy.brms.factories.KieSessionFactory;
 import com.garethahealy.brms.facts.Person;
 import com.garethahealy.brms.services.HelloWorldService;
 
+import org.jboss.shrinkwrap.api.ArchivePath;
+import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -61,15 +63,21 @@ public final class DefaultDeployment {
             .withTransitivity()
             .as(JavaArchive.class);
 
-        WebArchive jar = ShrinkWrap.create(WebArchive.class)
-            .addClass(KieSessionFactory.class)
-            .addClass(Person.class)
-            .addClass(HelloWorldService.class)
-            .addAsLibraries(libs)
-            .addAsManifestResource(new File("src/main/resources/META-INF/kmodule.xml"))
-            .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"))
-            .addAsWebInfResource(new File("src/main/webapp/WEB-INF/jboss-deployment-structure.xml"));
+        //Required by BRMS to start up Kie
+        ArchivePath pomPropsPath = ArchivePaths.create("maven/" + System.getProperty("groupId") + "/" + System.getProperty("artifactId") + "/pom.properties");
 
+        ArchivePath rulesPath = ArchivePaths.create("com/garethahealy/brms/rules/HelloWorldRule.drl");
+
+        WebArchive jar = ShrinkWrap.create(WebArchive.class)
+            .addPackage(KieSessionFactory.class.getPackage())
+            .addPackage(Person.class.getPackage())
+            .addPackage(HelloWorldService.class.getPackage())
+            .addAsLibraries(libs)
+            .addAsResource(new File("src/main/resources/com/garethahealy/brms/rules/HelloWorldRule.drl"), rulesPath)
+            .addAsManifestResource(new File("target/classes/META-INF/maven/dependencies.properties"), pomPropsPath)
+            .addAsManifestResource(new File("src/main/resources/META-INF/kmodule.xml"))
+            .addAsWebInfResource(new File("src/test/webapp/WEB-INF/beans.xml"))
+            .addAsWebInfResource(new File("src/test/webapp/WEB-INF/jboss-deployment-structure.xml"));
 
         return jar;
     }

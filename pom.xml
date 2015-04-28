@@ -13,7 +13,7 @@
     <artifactId>brms-helloworld</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
-    <packaging>war</packaging>
+    <packaging>kjar</packaging>
 
     <scm>
         <connection>scm:git:https://github.com/garethahealy/jboss-brms-helloworld/tree/master</connection>
@@ -32,10 +32,19 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <!--<configuration>
-                    <webXml>src\main\resources\webapp\WEB-INF\web.xml</webXml>
-                </configuration>-->
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>groupId</name>
+                            <value>${project.groupId}</value>
+                        </property>
+                        <property>
+                            <name>artifactId</name>
+                            <value>${project.artifactId}</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
             </plugin>
         </plugins>
     </build>

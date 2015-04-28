@@ -53,6 +53,7 @@ public class HelloWorldServiceTest {
 
         Person answer = helloWorldService.doSomething(person);
 
+        Assert.assertNotNull(answer);
         Assert.assertNotNull(answer.getIsOver18());
         Assert.assertTrue(answer.getIsOver18());
         Assert.assertEquals("Adult Gareth", answer.getName());
@@ -67,6 +68,7 @@ public class HelloWorldServiceTest {
 
         Person answer = helloWorldService.doSomething(person);
 
+        Assert.assertNotNull(answer);
         Assert.assertNotNull(answer.getIsOver18());
         Assert.assertFalse(answer.getIsOver18());
         Assert.assertEquals("Child Gareth", answer.getName());
