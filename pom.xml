@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.garethahealy</groupId>
         <artifactId>brms-parent</artifactId>
-        <version>1.0.5-SNAPSHOT</version>
+        <version>1.0.5</version>
         <relativePath>../poms/brms-parent</relativePath>
     </parent>
     <groupId>com.garethahealy.brms</groupId>
