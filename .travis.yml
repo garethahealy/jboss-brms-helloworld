@@ -1,5 +1,6 @@
+#Skip tests as they require Arquillian
 language: java
-install: mvn clean install -Dgpg.skip=true
+install: mvn clean install -Dgpg.skip=true -DskipTests
 jdk:
   - openjdk7
   - oraclejdk7
