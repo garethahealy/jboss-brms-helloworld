@@ -1,6 +1,6 @@
 /*
  * #%L
- * HelloWorld
+ * GarethHealy :: JBoss BRMS HelloWorld
  * %%
  * Copyright (C) 2013 - 2015 Gareth Healy
  * %%

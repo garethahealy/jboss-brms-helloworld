@@ -4,15 +4,15 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.garethahealy</groupId>
-        <artifactId>brms-parent</artifactId>
-        <version>1.1.0</version>
-        <relativePath>../poms/brms-parent</relativePath>
+        <groupId>com.garethahealy.poms</groupId>
+        <artifactId>jboss-brms-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath/>
     </parent>
-    <groupId>com.garethahealy.brms</groupId>
-    <artifactId>brms-helloworld</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
+    <groupId>com.garethahealy.jboss-brms-helloworld</groupId>
+    <artifactId>jboss-brms-helloworld-parent</artifactId>
+    <version>1.0.0</version>
+    <name>GarethHealy :: JBoss BRMS HelloWorld</name>
     <packaging>kjar</packaging>
 
     <scm>
@@ -131,6 +131,6 @@
             <artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
+
 </project>
