@@ -1,11 +1,11 @@
-#Skip tests as they require Arquillian
+dist: trusty
 language: java
-install: mvn clean install -Dgpg.skip=true -DskipTests
 jdk:
-  - openjdk7
-  - oraclejdk7
   - oraclejdk8
-script: /bin/true
+before_script:
+  - mvn dependency:resolve-plugins dependency:resolve
+script:
+  - mvn clean install -Dgpg.skip=true -DskipTests
 cache:
   directories:
   - $HOME/.m2
