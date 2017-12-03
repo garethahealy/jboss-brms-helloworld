@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/garethahealy/jboss-brms-helloworld.svg?branch=master)](https://travis-ci.org/garethahealy/jboss-brms-helloworld)
+[![License](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)]()
 
 # jboss-brms-helloworld
 First BRMS example worked on, which is based on some of the below:
