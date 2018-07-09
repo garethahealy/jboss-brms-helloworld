@@ -1,5 +1,10 @@
 sudo: required
 dist: trusty
+addons:
+  sonarcloud:
+    organization: garethahealy-github
+    token:
+      secure: NQ2Qh+qdvXCR58i6r+ygXVBS619vjXv9pKKy5QcZMlnuYCwhBoIUklytSumr5Ublsa/gESRYfJtkZ1HXfw56OL6TwbCxsen1A+KOnuQ+4TErxyQcOG45oX7Nmth2lu9+0kYBZYvSSgHWbtqvNn60+AQ8yW+a3wdBkTM3dlZeswA=
 language: java
 jdk:
 - oraclejdk8
@@ -8,9 +13,13 @@ before_install:
 install:
 - mvn -N io.takari:maven:wrapper -Dmaven=3.5.0
 - java -version && javac -version && ./mvnw -version -B
+before_script:
+- ./mvnw dependency:go-offline -B
 script:
-- mvn clean install -B -Dgpg.skip=true -DskipTests
+- ./mvnw clean install -B -Dgpg.skip=true -DskipTests
+- ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -B
 cache:
   directories:
   - $HOME/.m2
   - $HOME/.victims
+  - $HOME/.sonar/cache
